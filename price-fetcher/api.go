@@ -5,12 +5,9 @@ import (
 	"encoding/json"
 	"math/rand/v2"
 	"net/http"
-)
 
-type PriceResponse struct {
-	Ticker string  `json:"ticker"`
-	Price  float64 `json:"price"`
-}
+	"github.com/mazxcv/custom-tcp-server/price-fetcher/types"
+)
 
 type JSONAPIServer struct {
 	listenAddr string
@@ -32,7 +29,6 @@ func makeHTTPHandlerFunc(apiFunc APIFunc) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := apiFunc(context.Background(), w, r); err != nil {
-			w.WriteHeader(http.StatusBadRequest)
 			writeJSON(w, http.StatusBadRequest, map[string]any{"error": err.Error()})
 		}
 	}
@@ -51,7 +47,7 @@ func (s *JSONAPIServer) handleFetchPrice(ctx context.Context, w http.ResponseWri
 		return err
 	}
 
-	priceResponse := PriceResponse{
+	priceResponse := types.PriceResponse{
 		Price:  price,
 		Ticker: ticker,
 	}

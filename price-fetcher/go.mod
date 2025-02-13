@@ -1,4 +1,4 @@
-module github.com/mazxcv/custom-tcp-server
+module github.com/mazxcv/custom-tcp-server/price-fetcher
 
 go 1.23.0
 

@@ -1,0 +1,22 @@
+package genericlist
+
+import (
+	"fmt"
+
+	"github.com/mazxcv/custom-tcp-server/learn-channels/genericlist"
+)
+
+func main() {
+	genericlist := genericlist.New[string]()
+
+	genericlist.Insert("hello")
+	genericlist.Insert("broken")
+	genericlist.Insert("world")
+	genericlist.Insert("!")
+
+	genericlist.Remove(1)
+	genericlist.RemoveByValue("!")
+
+	fmt.Printf("%v\n", genericlist)
+
+}
